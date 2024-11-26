@@ -28,10 +28,10 @@ jobs:
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
-          ./gradlew assembleDebug --info
-          ls -Rl . 
+          ./gradlew assembleRelease --info
+          ls -Rl app/build/outputs/apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug.apk
-          path: app/build/outputs/apk/release/app-debug.apk
+          name: app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk
