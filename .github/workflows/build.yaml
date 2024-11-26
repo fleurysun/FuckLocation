@@ -21,15 +21,15 @@ jobs:
         name: Get project FuckLocation
         run: echo "::set-output name=PROJECT::$(cat project-to-build)"
       - name: Clone project
-        run: git clone --depth=1 ${{ steps.get-project.outputs.PROJECT }} https://github.com/AndyWangM/FuckLocation.git
+        run: git clone --depth=1 ${{ steps.get-project.outputs.PROJECT }} https://github.com/fleurysun/FuckLocation.git
       - name: Build the app
         working-directory: ./FuckLocation
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
-          ./gradlew assembleDebug --info
+          ./gradlew assembleRelease --info
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: app-debug.apk
-          path: ./FuckLocation/app/build/outputs/apk/debug/app-debug.apk
+          name: app-release.apk
+          path: ./FuckLocation/app/build/outputs/apk/release/app-release.apk
